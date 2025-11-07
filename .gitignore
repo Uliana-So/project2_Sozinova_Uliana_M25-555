@@ -1,6 +1,10 @@
 **/__pycache__/
 *.py[cod]
 
+build/
 .venv/
 dist/
 .ruff_cache/
+**/primitive_db.egg-info/
+
+db_meta.json

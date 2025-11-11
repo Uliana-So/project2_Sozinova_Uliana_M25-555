@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "project2-sozinova-uliana-m25-555"
 version = "0.1.0"
-description = "Text-based adventure game in Python 3.12"
+description = "A simple console-based database management system in Python with CRUD operations, caching, error handling, and formatted output."
 authors = ["Uliana Sozinova <uliana.so-dev@yandex.ru>"]
 readme = "README.md"
 packages = [
@@ -12,6 +12,7 @@ packages = [
 python = ">=3.12,<3.13"
 prompt = "^0.4.1"
 prettytable = "^3.16.0"
+asciinema = "^2.4.0"
 
 [tool.poetry.scripts]
 database = "src.primitive_db.main:main" 

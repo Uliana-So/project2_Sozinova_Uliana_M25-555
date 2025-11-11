@@ -13,9 +13,7 @@ from .exceptions import (
 
 
 def handle_db_errors(func):
-    """
-    Декоратор для обработки ошибок.
-    """
+    """Декоратор для обработки ошибок."""
 
     def wrapper(*args, **kwargs):
         try:
@@ -63,9 +61,7 @@ def confirm_action(action_name: str):
 
 
 def log_time(func):
-    """
-    Декоратор замеряет время выполнения функции.
-    """
+    """Декоратор замеряет время выполнения функции."""
 
     def wrapper(*args, **kwargs):
         start_time = time.monotonic()

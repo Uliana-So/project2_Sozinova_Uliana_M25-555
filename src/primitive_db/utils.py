@@ -19,8 +19,11 @@ def load_metadata(filepath: str) -> dict :
         dict: Метаданные или пустой словарь {} при отсутствии файла.
     """
 
-    with open(filepath, "r", encoding="utf-8") as file:
-        return json.load(file)
+    try:
+        with open(filepath, "r", encoding="utf-8") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
 
 
 def save_metadata(filepath: str, data: dict) -> None:
@@ -31,6 +34,7 @@ def save_metadata(filepath: str, data: dict) -> None:
         filepath (str): Путь для сохранения JSON-файла.
         data (dict): Данные для сохранения.
     """
+
     with open(filepath, "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
 
@@ -48,8 +52,11 @@ def load_table_data(table_name: str) -> list:
 
     filepath = os.path.join(DATA_DIR, f"{table_name}.json")
 
-    with open(filepath, "r", encoding="utf-8") as file:
-        return json.load(file)
+    try:
+        with open(filepath, "r", encoding="utf-8") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
 
 
 def save_table_data(table_name: str, data: list) -> None:
@@ -90,7 +97,7 @@ def print_help(commands: dict) -> None:
     Выводит список доступных функций и их описания.
 
     Args:
-        commands (dict): Словарь функций и их описаний
+        commands (dict): Словарь функций и их описаний.
     """
 
     print(bold_text("\n***   Процесс работы с таблицей   ***"))
@@ -108,7 +115,7 @@ def create_cacher():
         ключ и функцию value_func.
     """
 
-    _cache = {}  # это словарь для замыкания
+    _cache = {}  # словарь для замыкания
 
     def cache_result(table_name: str, key: str, value_func: Callable[[], Any]) -> Any:
         """

@@ -8,6 +8,11 @@ def bold_text(text: str) -> str:
     return "\033[1m{}\033[0m".format(text)
 
 
+def faded_text(text: str) -> str:
+    """Возвращает строку, оформленную блекло с помощью ANSI-кодов."""
+    return "\033[2m{}\033[0m".format(text)
+
+
 def italics_text(text: str) -> str:
     """Возвращает строку, оформленную курсивом с помощью ANSI-кодов."""
     return "\033[3m{}\033[0m".format(text)

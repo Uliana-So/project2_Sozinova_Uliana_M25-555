@@ -23,7 +23,7 @@ def process_command(db: Database, metadata: dict, cmd: str):
     match split_cmd[0].lower():
         case "create_table":
             if len(split_cmd) < 3:
-                raise ValueError(f"Некорректная функция: {cmd}. Попробуйте снова.")
+                raise ValueError(cmd)
             columns = [col.split(":") for col in split_cmd[2:]]
             db.create_table(metadata, split_cmd[1], columns)
         
@@ -32,32 +32,32 @@ def process_command(db: Database, metadata: dict, cmd: str):
         
         case "drop_table":
             if len(split_cmd) < 2:
-                raise ValueError(f"Некорректная функция: {cmd}. Попробуйте снова.")
+                raise ValueError(cmd)
             db.drop_table(metadata, split_cmd[1])
         
         case "insert":
             if len(split_cmd) < 5:
-                raise ValueError(f"Некорректная функция: {cmd}. Попробуйте снова.")
+                raise ValueError(cmd)
             db.insert(metadata, split_cmd[2], split_cmd[4:])
 
         case "select":
             if len(split_cmd) < 3:
-                raise ValueError(f"Некорректная функция: {cmd}. Попробуйте снова.")
+                raise ValueError(cmd)
             db.select(metadata, split_cmd[2], split_cmd[3:])
 
         case "update":
             if len(split_cmd) < 6:
-                raise ValueError(f"Некорректная функция: {cmd}. Попробуйте снова.")
+                raise ValueError(cmd)
             db.update(metadata, split_cmd[1], split_cmd[2:])
 
         case "delete":
-            if len(split_cmd) < 4:
-                raise ValueError(f"Некорректная функция: {cmd}. Попробуйте снова.")
+            if len(split_cmd) < 3:
+                raise ValueError(cmd)
             db.delete(metadata, split_cmd[2], split_cmd[3:])
 
         case "info":
             if len(split_cmd) < 2:
-                raise ValueError(f"Некорректная функция: {cmd}. Попробуйте снова.")
+                raise ValueError(cmd)
             db.info(metadata, split_cmd[1])
 
         case "help":
@@ -67,7 +67,7 @@ def process_command(db: Database, metadata: dict, cmd: str):
             exit()
 
         case _:
-            raise ValueError(f"Функции <{split_cmd[0]}> нет. Попробуйте снова.")
+            raise ValueError(cmd)
 
 
 def run():
@@ -83,7 +83,7 @@ def run():
             metadata = load_metadata(META_FILE)
             user_input = prompt.string(INPUT_PROMT)
             process_command(db, metadata, user_input)
-        except (ValueError) as error:
-            print(red_italics_text(error))
+        except (ValueError) as e:
+            print(red_italics_text(f"Некорректная функция: {e}. Попробуйте снова."))
         except (KeyboardInterrupt, EOFError):
             break

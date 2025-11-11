@@ -1,6 +1,9 @@
+from .exceptions import ParserError
+
+
 def _parse_single_assignment(tokens: list[str]) -> dict:
     if len(tokens) != 3 or tokens[1] != "=":
-        raise ValueError(f"Неверный формат выражения: {' '.join(tokens)}")
+        raise ParserError( ' '.join(tokens))
 
     key, _, value = tokens
 
@@ -16,14 +19,14 @@ def _parse_single_assignment(tokens: list[str]) -> dict:
 
 def parse_condition(condition: list[str]) -> dict:
     if condition[0].lower() != "where":
-        raise ValueError("Некорректная команда: ожидалось ключевое слово 'where'.")
+        raise ParserError("ожидалось ключевое слово 'where'")
 
     return _parse_single_assignment(condition[1:])
 
 
 def parse_update_parts(args: list[str]) -> tuple[dict, dict]:
     if args[0].lower() != "set":
-        raise ValueError("Некорректная команда: ожидалось ключевое слово 'set'.")
+        raise ParserError("ожидалось ключевое слово 'set'")
 
     if "where" in args:
         where_index = args.index("where")

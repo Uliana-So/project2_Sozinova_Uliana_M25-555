@@ -1,4 +1,4 @@
-# 🧠 PrimitiveDB — простая база данных на Python
+# 💾 PrimitiveDB — простая база данных на Python
 
 **PrimitiveDB** — это консольное приложение, реализующее базовые операции с таблицами (создание, вставка, выборка, обновление и удаление данных).  
 Проект создан в учебных целях для демонстрации принципов работы с метаданными, файлами JSON и базовых концепций СУБД.
@@ -63,4 +63,4 @@ make clean
 
 ## 🎥 Демонстрация использования (Asciinema)
 
-[![asciicast](https://asciinema.org/a/Lh5z3qPZ0peslPOLUEY8HhWA5.svg)](https://asciinema.org/a/Lh5z3qPZ0peslPOLUEY8HhWA5)
+![demo](assets/demo_db.gif)
